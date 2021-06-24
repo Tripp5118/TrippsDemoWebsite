@@ -1,0 +1,138 @@
+﻿@page "/rockpaperscissors"
+<h3>Rock Paper Scissors</h3>
+<h6>This is a small demo of a bot that will play rock paper scissors with you.</h6>
+
+<div>
+    <div class="row">
+        <div class="col-sm-4">
+            <button @onclick="ThrowRock" class="btn-primary">Rock!</button>
+        </div>
+        <div class="col-sm-4">
+            <button @onclick="ThrowPaper" class="btn-primary">Paper!</button>
+        </div>
+        <div class="col-sm-4">
+            <button @onclick="ThrowScissors" class="btn-primary">Scissors!</button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            Wins
+        </div>
+        <div class="col-sm-6">
+            Losses
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <input readonly @bind="winCount" />
+        </div>
+        <div class="col-sm-6">
+            <input readonly @bind="loseCount" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            Computer Move
+        </div>
+        <div class="col-sm-6">
+            Result
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <input readonly @bind="returnThrow" />
+        </div>
+        <div class="col-sm-6">
+            <input readonly @bind="returnMessage" />
+        </div>
+    </div>
+</div>
+
+@code {
+
+    string returnThrow;
+    string returnMessage;
+    string playerThrow;
+
+    int winCount = 0;
+    int loseCount = 0;
+    Random RND = new Random();
+    int roll;
+
+    void ThrowRock()
+    {
+        playerThrow = "Rock";
+        CompareResults();
+    }
+    void ThrowScissors()
+    {
+        playerThrow = "Scissors";
+        CompareResults();
+    }
+    void ThrowPaper()
+    {
+        playerThrow = "Paper";
+        CompareResults();
+    }
+    void CompareResults()
+    {
+        roll = RND.Next(1, 4);
+        if (roll == 1)
+        {
+            returnThrow = "Rock";
+        }
+        if (roll == 2)
+        {
+            returnThrow = "Paper";
+        }
+        if (roll == 3)
+        {
+            returnThrow = "Scissors";
+        }
+        if (playerThrow == returnThrow)
+        {
+            returnMessage = "Tie";
+        }
+        // If Player throws Paper
+        else if (playerThrow == "Paper" && returnThrow == "Rock")
+        {
+            returnMessage = "You Win!";
+            winCount++;
+        }
+        else if (playerThrow == "Paper" && returnThrow == "Scissors")
+        {
+            returnMessage = "You Lose!";
+            loseCount++;
+        }
+        // If player throws rock
+        else if (playerThrow == "Rock" && returnThrow == "Scissors")
+        {
+            returnMessage = "You Win!";
+            winCount++;
+        }
+        else if (playerThrow == "Rock" && returnThrow == "Paper")
+        {
+            returnMessage = "You Lose!";
+            loseCount++;
+        }
+        // If player throws Scissors
+        else if (playerThrow == "Scissors" && returnThrow == "Paper")
+        {
+            returnMessage = "You Win!";
+            winCount++;
+        }
+        else if (playerThrow == "Scissors" && returnThrow == "Rock")
+        {
+            returnMessage = "You Lose!";
+            loseCount++;
+        }
+    }
+
+}
+
+
+
+
+         

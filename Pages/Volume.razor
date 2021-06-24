@@ -1,0 +1,62 @@
+﻿@page "/volume"
+
+<h3>Volume of a Rectangular Prism</h3>
+
+This is a very small demo of a calculator for the volume of a rectangular prism.
+<hr />
+<div>
+    <div class="row">
+        <div class="col-sm-3">
+            <p>Length</p>
+        </div>
+        <div class="col-sm-4">
+            <input placeholder="Enter Length" @bind="length" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <p>Height</p>
+        </div>
+        <div class="col-sm-4">
+            <input placeholder="Enter Height" @bind="height" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <p>Width</p>
+        </div>
+        <div class="col-sm-4">
+            <input placeholder="Enter Width" @bind="width" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <p>Result</p>
+        </div>
+        <div class="col-sm-3">
+            <input readonly @bind="result" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <button @onclick="CalculateVol" class="btn-primary">Calculate</button>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string length;
+    string height;
+    string width;
+    string result;
+
+    void CalculateVol()
+    {
+        result = (Convert.ToDouble(length) * Convert.ToDouble(width) * Convert.ToDouble(height)).ToString();
+    }
+
+}
